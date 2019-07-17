@@ -1,0 +1,56 @@
+{
+    "id": "f5b3f86c-44f9-4293-acdf-4fab42e76f96",
+    "name": "DownloadSecureFileLegacy",
+    "friendlyName": "Download Secure File Legacy",
+    "description": "Download a secure file to a temporary location on the agent machine",
+    "helpMarkDown": "",
+    "category": "Utility",
+	"visibility": [
+        "Build",
+        "Release"
+	],
+    "author": "Adeptik",
+    "version": {
+        "Major": 0,
+        "Minor": 2,
+        "Patch": 0
+    },
+	"runsOn": [
+        "Agent",
+        "DeploymentGroup"
+	],
+	"demands": [],
+	"minimumAgentVersion": "2.116.0",
+    "instanceNameFormat": "Download secure file legacy",
+    "inputs": [
+        {
+            "name": "secureFile",
+            "type": "secureFile",
+            "label": "Secure File",            
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Select the secure file to download to a temporary location on the agent. The file will be cleaned up after the pipeline runs."
+        },
+        {
+            "name": "secureFilePathEnvVar",
+            "type": "string",
+            "label": "Secure File Path Environment Variable",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Environment variable name secure file path saves to after execution."
+        }
+    ],
+    "outputVariables": [
+        {
+            "name": "secureFilePath",
+            "description": "The location of the secure file that was downloaded."
+        }
+    ],
+    "prejobexecution": {
+        "Node": {
+            "target": "predownloadsecurefile.js",
+            "argumentFormat": ""
+        }
+    },
+	"messages": {}
+}

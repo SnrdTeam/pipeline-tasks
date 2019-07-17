@@ -1,0 +1,20 @@
+{
+  "name": "download-secure-file-legacy",
+  "version": "0.2.0",
+  "description": "Download a secure file to a temporary location on the agent machine",
+  "main": "predownloadsecurefile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adeptik",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^6.0.0",
+    "azure-pipelines-task-lib": "^2.8.0",
+	"azure-devops-node-api": "7.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.3",
+    "@types/q": "^1.5.2"
+  }
+}
