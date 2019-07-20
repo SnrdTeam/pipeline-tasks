@@ -1,0 +1,27 @@
+{
+  "name": "pipeline-tasks",
+  "version": "1.0.0",
+  "description": "A set of Build And Release tasks for Team Foundation server by Adeptik.",
+  "main": "echo \"This project builds custom tasks for TFS. Please run npm run-script build.\" && exit 1",
+  "scripts": {
+    "build": "node make.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SnrdTeam/pipeline-tasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SnrdTeam/pipeline-tasks/issues"
+  },
+  "homepage": "https://github.com/SnrdTeam/pipeline-tasks#readme",
+  "devDependencies": {
+    "typescript": "^3.5.3",
+    "fs-extra": "^8.1.0",
+    "tfx-cli": "^0.7.6"
+  },
+  "dependencies": {
+    "download-secure-file-legacy": "file:Tasks/DownloadSecureFileLegacyV0"
+  }
+}
