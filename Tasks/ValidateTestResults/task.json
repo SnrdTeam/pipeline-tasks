@@ -13,7 +13,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 0
+        "Patch": 8
     },
     "preview": true,
     "runsOn": [
@@ -26,12 +26,12 @@
         "HttpRequest": {
             "Execute": {
                 "EndpointId": "",
-                "EndpointUrl": "$(system.teamFoundationCollectionUri)$(System.TeamProject)/_apis/test/ResultSummaryByBuild?buildId=$(Build.BuildId)",
+                "EndpointUrl": "$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis/test/runs?buildUri=$(Build.BuildUri)&api-version=4.1",
                 "Method": "GET",
                 "Body": "",
-                "Headers": "{\n\"Content-Type\":\"application/json\"\n, \"Authorization\":\"Bearer $(system.accesstoken)\"\n}",
+                "Headers": "{\n\"Content-Type\":\"application/json\"\n, \"Authorization\":\"Bearer $(System.AccessToken)\"\n}",
                 "WaitForCompletion": "false",
-                "Expression": "le(0, jsonpath('$.aggregatedResultsAnalysis.totalTests')[0])"
+                "Expression": "eq(0, count(jsonpath('$.value[?(@.passedTests != @.totalTests)].id')))"
             }
         }
     }
