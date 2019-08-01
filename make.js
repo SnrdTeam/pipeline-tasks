@@ -47,8 +47,13 @@ const srcDir = "Tasks";
 var buildTask = function (taskName) {
     console.log(`Building task ${taskName} ...`);
 
-    run(`npm install ./${srcDir}/${taskName}`);
-    run(`node node_modules/typescript/bin/tsc --outDir ./${buildDir}/${taskName} --p ./${srcDir}/${taskName}`);
+    if (fs.existsSync(`${srcDir}/${taskName}/package.json`)) {
+
+        run(`npm install ./${srcDir}/${taskName}`);
+
+        if (ls(`${srcDir}/${taskName}`).filter(file => file.endsWith(".ts")).length > 0)
+            run(`node node_modules/typescript/bin/tsc --outDir ./${buildDir}/${taskName} --p ./${srcDir}/${taskName}`);
+    }
 
     ls(`${srcDir}/${taskName}`)
         .filter(file => file.endsWith(".json") || file.endsWith(".svg") || file.endsWith(".png"))
