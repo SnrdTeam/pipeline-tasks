@@ -1,15 +1,15 @@
 {
     "manifestVersion": 1,
-    "id": "download-secure-file-legacy-task",
-    "name": "Download Secure File Legacy",
-    "version": "0.2.1",
+    "id": "adeptik-pipline-tasks",
+    "name": "Adeptik pipelines",
+    "version": "0.2.18",
     "publisher": "Adeptik",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "Download a secure file to a temporary location on the agent machine.",
+    "description": "Collection of custom Adeptik TFS (Azure pipeline) tasks.",
     "categories": [
         "Build and release"
     ],
@@ -19,6 +19,9 @@
     "files": [
         {
             "path": "DownloadSecureFileLegacyV0"
+        },
+        {
+            "path": "ValidateTestResults"
         }
     ],
     "contributions": [
@@ -30,6 +33,16 @@
             ],
             "properties": {
                 "name": "DownloadSecureFileLegacyV0"
+            }
+        },
+        {
+            "id": "validate-test-results-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "ValidateTestResults"
             }
         }
     ]

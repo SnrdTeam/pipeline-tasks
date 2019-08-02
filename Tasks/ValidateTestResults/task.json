@@ -1,0 +1,38 @@
+{
+    "id": "19c0dd1b-95ac-40d0-abff-f640781dc18d",
+    "name": "ValidateTestResults",
+    "friendlyName": "Validate Test Results",
+    "description": "Validates test results attached to Build.",
+    "helpMarkDown": "",
+    "category": "Test",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "author": "Adeptik",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 10
+    },
+    "preview": true,
+    "runsOn": [
+        "Server"
+    ],
+    "demands": [],
+    "instanceNameFormat": "Validate Test Results",
+    "inputs": [],
+    "execution": {
+        "HttpRequest": {
+            "Execute": {
+                "EndpointId": "",
+                "EndpointUrl": "$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis/test/runs?buildUri=$(Build.BuildUri)&api-version=4.1",
+                "Method": "GET",
+                "Body": "",
+                "Headers": "{\n\"Content-Type\":\"application/json\"\n, \"Authorization\":\"Bearer $(System.AccessToken)\"\n}",
+                "WaitForCompletion": "false",
+                "Expression": "eq(0, count(jsonpath('$.value[?(@.incompleteTests != 0 || @.notApplicableTests != 0 || @.unanalyzedTests != 0)]')))"
+            }
+        }
+    }
+}
