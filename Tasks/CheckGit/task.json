@@ -1,5 +1,5 @@
 {
-    "id": "765f249c-959b-49ff-8409-8e07b94216c4",
+    "id": "87106cf2-d9fb-4c2e-bb97-0335e5ee5334",
     "name": "checkgit",
     "friendlyName": "Check git",
     "description": "Checking that work is in progress with the current branch, checking the HEAD pointer and checking for the presence of a tag",
