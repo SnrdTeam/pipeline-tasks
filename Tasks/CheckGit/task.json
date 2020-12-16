@@ -24,10 +24,10 @@
         {
             "name": "tagValidation",
             "type": "bool",
-            "label": "Is there a tag",
+            "label": "Tag validation",
             "defaultValue": false,
             "required": true,
-            "helpMarkDown": "Are the "
+            "helpMarkDown": "Checking the last tag"
         }
     ],
     "execution": {
