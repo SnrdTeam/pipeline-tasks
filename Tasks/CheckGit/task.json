@@ -28,6 +28,14 @@
             "defaultValue": false,
             "required": true,
             "helpMarkDown": "Checking the last tag"
+        },
+        {
+            "name": "headValidation",
+            "type": "bool",
+            "label": "HEAD validation",
+            "defaultValue": "master",
+            "required": true,
+            "helpMarkDown": "Checking that the local hash of the HEAD is equal to the remote HEAD"
         }
     ],
     "execution": {
