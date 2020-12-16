@@ -14,14 +14,16 @@ async function run() {
             return;
         }
         
-        //Get a current branch name which local HEAD points to
-        let exec = shell.exec('git rev-parse --abbrev-ref HEAD', { silent: true });
+        //Get a branches name and detached heads which local HEAD points to
+        let exec = shell.exec('git branch --contains HEAD', { silent: true });
         await checkGitExitCode(exec);
-        const currentBranchName: string = exec.stdout.replace(/[\r\n]$/, '');
+        const branchesContainsHead: string[] = exec.stdout.split(/\r\n|\n|\r/)
+            .map(branchName => branchName.replace(/[*]/g, '').trim())
+            .filter(branchName => typeof branchName !== 'undefined' && branchName);
         
-        console.log(`Current build branch name is "${currentBranchName}", expected branch name specified in the task is "${branchName}"`);
+        console.log(`Branches and detached heads contains head commit is ${branchesContainsHead.map(branch => `"${branch}"`).join(",")}, expected branch name specified in the task is "${branchName}"`);
         
-        if(currentBranchName !== branchName)
+        if(branchesContainsHead.indexOf(branchName) === -1)
         {
             tl.setResult(tl.TaskResult.Failed, "Wrong branch", true);
             return;
