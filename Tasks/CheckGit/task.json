@@ -9,7 +9,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 0
+        "Patch": 1
     },
     "instanceNameFormat": "Check branch '$(branch)'",
     "inputs": [
@@ -23,7 +23,7 @@
         },
         {
             "name": "tagValidation",
-            "type": "bool",
+            "type": "Boolean",
             "label": "Tag validation",
             "defaultValue": false,
             "required": true,
@@ -31,9 +31,9 @@
         },
         {
             "name": "headValidation",
-            "type": "bool",
+            "type": "Boolean",
             "label": "HEAD validation",
-            "defaultValue": "master",
+            "defaultValue": false,
             "required": true,
             "helpMarkDown": "Checking that the local hash of the HEAD is equal to the remote HEAD"
         }

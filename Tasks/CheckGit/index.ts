@@ -17,18 +17,20 @@ async function run() {
         //Get a current branch name which local HEAD points to
         let exec = shell.exec('git rev-parse --abbrev-ref HEAD', { silent: true });
         await checkGitExitCode(exec);
-        const currentBranchName = exec.stdout.replace(/[\r\n]$/, '');
-
+        const currentBranchName: string = exec.stdout.replace(/[\r\n]$/, '');
+        
+        console.log(`Current build branch name is "${currentBranchName}", expected branch name specified in the task is "${branchName}"`);
+        
         if(currentBranchName !== branchName)
         {
-            tl.setResult(tl.TaskResult.Failed, "The current branch does not match the one specified in the task", true);
+            tl.setResult(tl.TaskResult.Failed, "Wrong branch", true);
             return;
         }
 
         //Get the hash of the local HEAD commit
         exec = shell.exec('git rev-parse HEAD', { silent: true });
         await checkGitExitCode(exec);
-        const hashLocalHeadCommit = exec.stdout.replace(/[\r\n]$/, '');
+        const hashLocalHeadCommit: string = exec.stdout.replace(/[\r\n]$/, '');
         
         //Checking that the local hash of the head is equal to the remote head
         if(headValidation)
@@ -36,10 +38,13 @@ async function run() {
             //Get the hash of the remote HEAD commit
             exec = shell.exec(`git rev-parse origin/${branchName}`, { silent: true })
             await checkGitExitCode(exec);
-            const hashRemoteHeadCommit = exec.stdout.replace(/[\r\n]$/, '');
+            const hashRemoteHeadCommit: string = exec.stdout.replace(/[\r\n]$/, '');
+            
+            console.log(`Current build HEAD hash is "${hashLocalHeadCommit}", expected HEAD hash is "${hashRemoteHeadCommit}"`);
+            
             if(hashRemoteHeadCommit !== hashLocalHeadCommit)
             {
-                tl.setResult(tl.TaskResult.Failed, "Local HEAD hash does not match remote HEAD hash", true);
+                tl.setResult(tl.TaskResult.Failed, "Local and remote HEAD do not match", true);
                 return;
             }
         }
@@ -51,14 +56,20 @@ async function run() {
             //If no tags exist, this command will return fatal error and non-zero return code for git
             exec = shell.exec('git describe --tags --abbrev=0', { silent: true });
             await checkGitExitCode(exec);
-            const latestTagName = exec.stdout.replace(/[\r\n]$/, '');
+            const latestTagName: string = exec.stdout.replace(/[\r\n]$/, '');
+            
+            console.log(`Latest tag name is "${latestTagName}"`);
+            
             //Get the hash of the commit pointed to by the tag
             exec = shell.exec(`git rev-list -n 1 "${latestTagName}"`, { silent: true });
             await checkGitExitCode(exec);
-            const tagHash = exec.stdout.replace(/[\r\n]$/, '');
+            const tagHash: string = exec.stdout.replace(/[\r\n]$/, '');
+            
+            console.log(`The last commit with a tag has a hash "${tagHash}", expected hash "${hashLocalHeadCommit}"`);
+            
             if(hashLocalHeadCommit !== tagHash)
             {
-                tl.setResult(tl.TaskResult.Failed, "Last commit with tag does not match local HEAD hash", true);
+                tl.setResult(tl.TaskResult.Failed, "Tag not found", true);
                 return;
             }
         }
