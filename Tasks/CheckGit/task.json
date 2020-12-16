@@ -5,7 +5,7 @@
     "description": "Checking that work is in progress with the current branch, checking the HEAD pointer and checking for the presence of a tag",
     "helpMarkDown": "",
     "category": "Utility",
-    "author": "Entropic Solutions",
+    "author": "Adeptik",
     "version": {
         "Major": 0,
         "Minor": 1,
