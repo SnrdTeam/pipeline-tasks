@@ -22,6 +22,8 @@
     "tfx-cli": "^0.7.6"
   },
   "dependencies": {
-    "download-secure-file-legacy": "file:Tasks/DownloadSecureFileLegacyV0"
+    "check-git": "file:Tasks/CheckGit",
+    "download-secure-file-legacy": "file:Tasks/DownloadSecureFileLegacyV0",
+    "git-tag-loader": "file:Tasks/CheckGit"
   }
 }
