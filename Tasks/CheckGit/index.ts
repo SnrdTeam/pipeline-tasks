@@ -42,6 +42,7 @@ async function run() {
             if(hashHeadCommit !== tagHash)
             {
                 tl.setResult(tl.TaskResult.Failed, "Last commit with tag does not match HEAD hash", true);
+                return;
             }
         }
         
