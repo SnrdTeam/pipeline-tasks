@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "adeptik-pipline-tasks",
     "name": "Adeptik pipelines",
-    "version": "0.2.18",
+    "version": "0.3.0",
     "publisher": "Adeptik",
     "targets": [
         {
@@ -22,6 +22,9 @@
         },
         {
             "path": "ValidateTestResults"
+        },
+        {
+            "path": "CheckGit"
         }
     ],
     "contributions": [
@@ -43,6 +46,16 @@
             ],
             "properties": {
                 "name": "ValidateTestResults"
+            }
+        },
+        {
+            "id": "check-git",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "CheckGit"
             }
         }
     ]
