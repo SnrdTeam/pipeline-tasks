@@ -21,7 +21,7 @@ async function run() {
             .map(branchName => branchName.replace(/[*]/g, '').trim())
             .filter(branchName => typeof branchName !== 'undefined' && branchName);
         
-        console.log(`Branches and detached heads contains head commit is ${branchesContainsHead.map(branch => `"${branch}"`).join(",")}, expected branch name specified in the task is "${branchName}"`);
+        console.log(`Branches and detached heads contains head commit is ${branchesContainsHead.map(branch => `"${branch}"`).join(",")}. Expected branch name specified in the task is "${branchName}"`);
         
         if(branchesContainsHead.indexOf(branchName) === -1)
         {
