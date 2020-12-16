@@ -1,0 +1,38 @@
+{
+    "id": "765f249c-959b-49ff-8409-8e07b94216c4",
+    "name": "checkgit",
+    "friendlyName": "Check git",
+    "description": "Checking that work is in progress with the current branch, checking the HEAD pointer and checking for the presence of a tag",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Entropic Solutions",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Check branch '$(branch)'",
+    "inputs": [
+        {
+            "name": "branch",
+            "type": "string",
+            "label": "Work branch",
+            "defaultValue": "master",
+            "required": true,
+            "helpMarkDown": "Required branch"
+        },
+        {
+            "name": "tagValidation",
+            "type": "bool",
+            "label": "Is there a tag",
+            "defaultValue": false,
+            "required": true,
+            "helpMarkDown": "Are the "
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "index.js"
+        }
+    }
+}
