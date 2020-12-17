@@ -10,22 +10,22 @@ async function run() {
 
         if (!shell.which('git')) 
         {
-            tl.setResult(tl.TaskResult.Failed, `git is required to run this script`, true);
+            tl.setResult(tl.TaskResult.Failed, `GIT CLI utility is required to run this task`, true);
             return;
         }
         
         //Get a branches name and detached heads which local HEAD points to
-        let exec = shell.exec('git branch --contains HEAD', { silent: true });
+        let exec = shell.exec('git branch -r --contains HEAD', { silent: true });
         await checkGitExitCode(exec);
         const branchesContainsHead: string[] = exec.stdout.split(/\r\n|\n|\r/)
-            .map(branchName => branchName.replace(/[*]/g, '').trim())
+            .map(branchName => branchName.trim())
             .filter(branchName => typeof branchName !== 'undefined' && branchName);
         
-        console.log(`Branches and detached heads contains head commit is ${branchesContainsHead.map(branch => `"${branch}"`).join(",")}. Expected branch name specified in the task is "${branchName}"`);
+        console.log(`Identical source code is contained in branches ${branchesContainsHead.map(branch => `"${branch}"`).join(",")}. Expected branch name is "${branchName}"`);
         
         if(branchesContainsHead.indexOf(branchName) === -1)
         {
-            tl.setResult(tl.TaskResult.Failed, "Wrong branch", true);
+            tl.setResult(tl.TaskResult.Failed, `In the specified branch named ${branchName} does not contain required source codes`, true);
             return;
         }
 
@@ -38,15 +38,15 @@ async function run() {
         if(headValidation)
         {
             //Get the hash of the remote HEAD commit
-            exec = shell.exec(`git rev-parse origin/${branchName}`, { silent: true })
+            exec = shell.exec(`git rev-parse ${branchName}`, { silent: true })
             await checkGitExitCode(exec);
             const hashRemoteHeadCommit: string = exec.stdout.replace(/[\r\n]$/, '');
             
-            console.log(`Current build HEAD hash is "${hashLocalHeadCommit}", expected HEAD hash is "${hashRemoteHeadCommit}"`);
+            console.log(`The sources are expected to be the latest in the branch"`);
             
             if(hashRemoteHeadCommit !== hashLocalHeadCommit)
             {
-                tl.setResult(tl.TaskResult.Failed, "Local and remote HEAD do not match", true);
+                tl.setResult(tl.TaskResult.Failed, `Sources must refer to the last commit on the branch ${branchName}`, true);
                 return;
             }
         }
@@ -60,18 +60,18 @@ async function run() {
             await checkGitExitCode(exec);
             const latestTagName: string = exec.stdout.replace(/[\r\n]$/, '');
             
-            console.log(`Latest tag name is "${latestTagName}"`);
+            console.log(`Available tag name is "${latestTagName}"`);
             
             //Get the hash of the commit pointed to by the tag
             exec = shell.exec(`git rev-list -n 1 "${latestTagName}"`, { silent: true });
             await checkGitExitCode(exec);
             const tagHash: string = exec.stdout.replace(/[\r\n]$/, '');
             
-            console.log(`The last commit with a tag has a hash "${tagHash}", expected hash "${hashLocalHeadCommit}"`);
+            console.log(`The tag refers to a commit with a hash ${tagHash}, expected hash ${hashLocalHeadCommit}`);
             
             if(hashLocalHeadCommit !== tagHash)
             {
-                tl.setResult(tl.TaskResult.Failed, "Tag not found", true);
+                tl.setResult(tl.TaskResult.Failed, "Sources must have a tag", true);
                 return;
             }
         }
