@@ -24,7 +24,7 @@
         {
             "name": "tagValidation",
             "type": "Boolean",
-            "label": "Has tag?",
+            "label": "Has tag",
             "defaultValue": false,
             "required": true,
             "helpMarkDown": "Checks that the sources have at least one tag"
@@ -32,7 +32,7 @@
         {
             "name": "headValidation",
             "type": "Boolean",
-            "label": "Last commit?",
+            "label": "Latest commit",
             "defaultValue": false,
             "required": true,
             "helpMarkDown": "Checking that this is the most recent commit in the branch"
