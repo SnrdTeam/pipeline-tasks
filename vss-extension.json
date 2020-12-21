@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "adeptik-pipline-tasks",
     "name": "Adeptik pipelines",
-    "version": "0.3.6",
+    "version": "0.3.7",
     "publisher": "Adeptik",
     "targets": [
         {
