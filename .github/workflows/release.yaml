@@ -29,12 +29,17 @@ jobs:
     
     - run: npm run-script build
       
+    - name: Get Name of Artifact
+      run: |
+        ARTIFACT_PATHNAME=$(ls _build/Adeptik.adeptik-pipline-tasks*.vsix | head -n 1)        
+        echo ::set-env name=ARTIFACT_PATHNAME::${ARTIFACT_PATHNAME}
+      
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: _build/Adeptik.adeptik-pipline-tasks*.vsix
+        asset_path: ${{ env.ARTIFACT_PATHNAME }}
         asset_name: Adeptik.adeptik-pipline-tasks.vsix
         asset_content_type: application/vsix
