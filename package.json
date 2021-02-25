@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "check-git": "file:Tasks/CheckGit",
-    "download-secure-file-legacy": "file:Tasks/DownloadSecureFileLegacyV0"
+    "download-secure-file-legacy": "file:Tasks/DownloadSecureFileLegacyV0",
+    "download-secure-file-to": "file:Tasks/DownloadSecureFileToV0"
   }
 }

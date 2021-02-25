@@ -29,10 +29,13 @@ export class SecureFileHelpers {
      * Download secure file contents to a temporary location for the build
      * @param secureFileId Secure file id.
      * @param secureFilePath Secure file path save to.
+     * @param overwrite Replace file if it exists or not.
      */
-    async downloadSecureFile(secureFileId: string, secureFilePath: string): Promise<void> {        
+    async downloadSecureFile(secureFileId: string, secureFilePath: string, overwrite: boolean): Promise<void> {        
         tl.debug('Downloading secure file contents to: ' + secureFilePath);
-        const file: NodeJS.WritableStream = fs.createWriteStream(secureFilePath);
+        const file: NodeJS.WritableStream = fs.createWriteStream(secureFilePath, {
+            flags: overwrite ? 'w' : 'wx'
+        });
 
         const agentApi = await this.serverConnection.getTaskAgentApi();
 

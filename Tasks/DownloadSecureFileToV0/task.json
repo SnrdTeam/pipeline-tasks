@@ -13,7 +13,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 0
+        "Patch": 3
     },
 	"runsOn": [
         "Agent",
@@ -34,10 +34,18 @@
         {
             "name": "secureFilePath",
             "type": "string",
-            "label": "Path to save secure file",
+            "label": "Path save secure file to",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to save secure file."
+            "helpMarkDown": "Full path to the file."
+        },
+        {
+            "name": "overwrite",
+            "type": "boolean",
+            "label": "Overwrite",
+            "defaultValue": "false",
+            "required": true,
+            "helpMarkDown": "Replace file if it exists or not."
         }
     ],
     "execution": {
