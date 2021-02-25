@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "adeptik-pipline-tasks",
     "name": "Adeptik pipelines",
-    "version": "0.3.7",
+    "version": "0.3.12",
     "publisher": "Adeptik",
     "targets": [
         {
@@ -21,6 +21,9 @@
             "path": "DownloadSecureFileLegacyV0"
         },
         {
+            "path": "DownloadSecureFileToV0"
+        },
+        {
             "path": "ValidateTestResults"
         },
         {
@@ -36,6 +39,16 @@
             ],
             "properties": {
                 "name": "DownloadSecureFileLegacyV0"
+            }
+        },
+        {
+            "id": "download-secure-file-to-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "DownloadSecureFileToV0"
             }
         },
         {
