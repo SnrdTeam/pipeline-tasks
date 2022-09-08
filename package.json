@@ -19,7 +19,7 @@
   "devDependencies": {
     "typescript": "^3.5.3",
     "fs-extra": "^8.1.0",
-    "tfx-cli": "^0.7.6"
+    "tfx-cli": "^0.12.0"
   },
   "dependencies": {
     "check-git": "file:Tasks/CheckGit",
